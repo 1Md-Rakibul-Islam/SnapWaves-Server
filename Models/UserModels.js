@@ -2,31 +2,38 @@
 import mongoose from "mongoose";
 
 const UserSchema = mongoose.Schema({
+  role: {
+    type: String,
+  },
   name: {
     type: String,
-    required: true,
+    required: true
   },
   email: {
     type: String,
-    unique: true,
+    required: true,
+    unique: true // ensure the email field is unique
   },
   phone: {
     type: String,
   },
-  role: {
-    type: String,
-  },
-  photoURL: String,
+  profileImg: String,
   coverPhotoURL: String,
+  education: String,
+  warks: String,
+  address: String,
   about: String,
-  livesIn: String,
-  worksAt: String,
   relationship: String,
-  country: String,
-  followers: [],
-  following: [],
+  followers: {
+    type: Array,
+    default: [],
+  },
+  following: {
+    type: Array,
+    default: [],
+  },
 }
 );
 
-const UserModel = mongoose.model("User", UserSchema);
+const UserModel = mongoose.model("users", UserSchema);
 export default UserModel;
