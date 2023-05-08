@@ -5,6 +5,7 @@ const postSchema = mongoose.Schema(
     userId: { type: String, required: true },
     desc: {type: String},
     likes: [],
+    comments: [],
     createdAt: {
       type: Date,
       default: new Date(),

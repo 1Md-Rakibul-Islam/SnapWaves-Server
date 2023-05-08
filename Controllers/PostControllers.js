@@ -84,6 +84,7 @@ export const deletePost = async (req, res) => {
   }
 };
 
+// like/unlike post
 export const likePost = async (req, res) => {
   const id = req.params.id;
   const {userId} = req.body;
@@ -95,6 +96,26 @@ export const likePost = async (req, res) => {
       res.status(200).json("Post disliked");
     } else {
       await post.updateOne({ $push: { likes: userId } });
+      res.status(200).json("Post liked");
+    }
+  } catch (error) {
+    res.status(500).json(error)
+  }
+}
+
+export const commentPost = async (req, res) => {
+  const id = req.params.id;
+  const comments = req.body;
+
+  console.log(id);
+  console.log(comments);
+
+  try {
+    const post = await PostModel.findById(id);
+    if (post) {
+      await post.updateOne({ $push: { comments } });
+      res.status(200).json("Post commented");
+    } else {
       res.status(200).json("Post liked");
     }
   } catch (error) {
