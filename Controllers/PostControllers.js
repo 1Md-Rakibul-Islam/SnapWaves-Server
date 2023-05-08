@@ -13,6 +13,19 @@ export const createPost = async (req, res) => {
   }
 };
 
+// get user own all posts
+export const getPostsByUser = async (req, res) => {
+
+  const user = req.params.id
+
+  try {
+    const posts = await PostModel.find({userId: user});
+    res.status(200).json(posts);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
+
 // get timeline post
 export const getTimelinePosts = async (req, res) => {
   try {
@@ -71,22 +84,21 @@ export const deletePost = async (req, res) => {
   }
 };
 
-// like/dislike a post
 export const likePost = async (req, res) => {
   const id = req.params.id;
-  const { userId } = req.body;
+  const {userId} = req.body;
+
   try {
     const post = await PostModel.findById(id);
-    if (post.likes.includes(userId)) {
-      await post.updateOne({ $pull: { likes: userId } });
+    if (post?.likes?.includes(userId)) {
+      await post.updateOne({ $pull: { likes: userId }});
       res.status(200).json("Post disliked");
     } else {
       await post.updateOne({ $push: { likes: userId } });
       res.status(200).json("Post liked");
     }
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json(error)
   }
-};
-
+}
 
