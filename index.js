@@ -16,6 +16,7 @@ app.use(express.json());
 //Route
 import UserRoute from './Routes/UserRoute.js'
 import ChatRoute from './Routes/ChatRoute.js'
+import MessageRoute from './Routes/MessageRoute.js'
 import PostRoute from './Routes/PostRoute.js'
 
 //Mongoose setup
@@ -31,5 +32,5 @@ mongoose
 // API
 app.use('/users', UserRoute);
 app.use('/chat', ChatRoute);
-app.use('/:chatId', getMessages)
+app.use('/message', MessageRoute)
 app.use('/posts', PostRoute);
