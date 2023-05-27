@@ -32,5 +32,5 @@ mongoose
 // API
 app.use('/users', UserRoute);
 app.use('/chat', ChatRoute);
-app.use('/message', MessageRoute)
+app.use('/messages', MessageRoute)
 app.use('/posts', PostRoute);
